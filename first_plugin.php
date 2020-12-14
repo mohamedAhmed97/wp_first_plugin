@@ -15,9 +15,13 @@ if (!defined('ABSPATH')) {
 if (!class_exists("FirstPlugin")) {
     class FirstPlugin
     {
+        public $plugin_name;
         public function __construct()
         {
+            $this->plugin_name=plugin_basename(__FILE__);
             add_action("admin_menu", array($this, "adminPage"));
+            #add settings link
+            add_filter("plugin_action_links_$this->plugin_name",array($this,"settingLink"));
         }
 
         public function adminPage()
@@ -27,9 +31,21 @@ if (!class_exists("FirstPlugin")) {
                 "school",
                 "manage_options",
                 "first_plugin",
-                array($this,"pageTemplate"),
+                array($this, "pageTemplate"),
                 "dashicons-admin-home"
             );
+        }
+        #settingLink
+        public function settingLink($links)
+        {
+            $setting_link='<a href="admin.php?page=first_plugin">settings</a>';
+            array_push($links,$setting_link);
+            return $links;
+        }
+        #pageTemplate
+        public function pageTemplate()
+        {
+            require_once plugin_dir_path(__FILE__) . "templates/school.php";
         }
         #active
         public function active()
