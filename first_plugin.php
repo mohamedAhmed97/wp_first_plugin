@@ -17,9 +17,21 @@ if (!class_exists("FirstPlugin")) {
     {
         public function __construct()
         {
-            echo "hello";
+            add_action("admin_menu", array($this, "adminPage"));
         }
 
+        public function adminPage()
+        {
+            add_menu_page(
+                "schools",
+                "school",
+                "manage_options",
+                "first_plugin",
+                array($this,"pageTemplate"),
+                "dashicons-admin-home"
+            );
+        }
+        #active
         public function active()
         {
             require_once plugin_dir_path(__FILE__) . "/inc/first_active.php";
