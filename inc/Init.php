@@ -8,7 +8,8 @@ final class Init
     public static function getServices()
     {
         return [
-            Pages\Admin::class
+            Pages\Admin::class,
+            Base\SettingLink::class
         ];
     }
 

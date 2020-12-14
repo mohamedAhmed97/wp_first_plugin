@@ -21,6 +21,7 @@ use Inc\Active;
 use Inc\Deactive;
 
 define("plugin_path", plugin_dir_path(__FILE__));
+define("plugin_name",plugin_basename(__FILE__));
 function active()
 {
     Active::active();
