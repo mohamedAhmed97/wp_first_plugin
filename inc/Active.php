@@ -1,8 +1,8 @@
 <?php
-class FirstActive{
+namespace Inc;
+class Active{
     public static function active()
     {
         flush_rewrite_rules();
     }
 }
-?>

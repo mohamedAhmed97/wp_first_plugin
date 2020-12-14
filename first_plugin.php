@@ -11,17 +11,22 @@
 if (!defined('ABSPATH')) {
     die;
 }
-
+#check for vender/autoload
+if (file_exists(dirname(__FILE__) . "/vendor/autoload.php")) {
+    require_once dirname(__FILE__) . "/vendor/autoload.php";
+}
+use Inc\Active;
+use Inc\Deactive;
 if (!class_exists("FirstPlugin")) {
     class FirstPlugin
     {
         public $plugin_name;
         public function __construct()
         {
-            $this->plugin_name=plugin_basename(__FILE__);
+            $this->plugin_name = plugin_basename(__FILE__);
             add_action("admin_menu", array($this, "adminPage"));
             #add settings link
-            add_filter("plugin_action_links_$this->plugin_name",array($this,"settingLink"));
+            add_filter("plugin_action_links_$this->plugin_name", array($this, "settingLink"));
         }
 
         public function adminPage()
@@ -38,8 +43,8 @@ if (!class_exists("FirstPlugin")) {
         #settingLink
         public function settingLink($links)
         {
-            $setting_link='<a href="admin.php?page=first_plugin">settings</a>';
-            array_push($links,$setting_link);
+            $setting_link = '<a href="admin.php?page=first_plugin">settings</a>';
+            array_push($links, $setting_link);
             return $links;
         }
         #pageTemplate
@@ -50,14 +55,12 @@ if (!class_exists("FirstPlugin")) {
         #active
         public function active()
         {
-            require_once plugin_dir_path(__FILE__) . "/inc/first_active.php";
-            FirstActive::active();
+           Active::active();
         }
 
         public function deactive()
         {
-            require_once plugin_dir_path(__FILE__) . "/inc/first_deactive.php";
-            FirstDeactive::deactive();
+           Deactive::deactive();
         }
     }
 

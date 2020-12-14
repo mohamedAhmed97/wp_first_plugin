@@ -1,0 +1,17 @@
+{
+    "name": "amrawey/first_plugin",
+    "description": "first plugin",
+    "license": "GPT",
+    "authors": [
+        {
+            "name": "mohamedAhmed97",
+            "email": "mohamed.a.ramadan23@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Inc\\":"./inc"
+        }
+    }
+}
