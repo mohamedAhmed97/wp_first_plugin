@@ -22,19 +22,20 @@ if (!class_exists("FirstPlugin")) {
 
         public function active()
         {
-            require_once plugin_dir_path(__FILE__)."/inc/first_active.php";
+            require_once plugin_dir_path(__FILE__) . "/inc/first_active.php";
             FirstActive::active();
         }
 
         public function deactive()
         {
-            require_once plugin_dir_path(__FILE__)."/inc/first_deactive.php";
+            require_once plugin_dir_path(__FILE__) . "/inc/first_deactive.php";
             FirstDeactive::deactive();
         }
-
     }
 
-    $firstPlugin=new FirstPlugin();
-
-
+    $firstPlugin = new FirstPlugin();
+    #register active
+    register_activation_hook(__FILE__, array($firstPlugin, 'active'));
+    #register deactive
+    register_deactivation_hook(__FILE__, array($firstPlugin, 'deactive'));
 }
