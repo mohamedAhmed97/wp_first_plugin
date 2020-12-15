@@ -20,18 +20,19 @@ use Inc;
 use Inc\Active;
 use Inc\Deactive;
 
-define("plugin_path", plugin_dir_path(__FILE__));
-define("plugin_name",plugin_basename(__FILE__));
+
 function active()
 {
     Active::active();
 }
+register_activation_hook(__FILE__, "active");
+
 function deactive()
 {
     Deactive::deactive();
 }
+register_deactivation_hook(__FILE__, 'deactive');
+
 if (class_exists('Inc\\Init')) {
     Inc\Init::registerServices();
 }
-register_activation_hook(__FILE__, "active");
-register_deactivation_hook(__FILE__, 'deactive');

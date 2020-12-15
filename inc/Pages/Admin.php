@@ -1,8 +1,8 @@
 <?php
 
 namespace Inc\Pages;
-
-class Admin
+use \Inc\Controller\BaseController;
+class Admin extends BaseController
 {
     public function register()
     {
@@ -22,6 +22,6 @@ class Admin
 
     public function pageTemplate()
     {
-        require_once plugin_path."/templates/school.php";
+        require_once $this->plugin_path."/templates/school.php";
     }
 }
