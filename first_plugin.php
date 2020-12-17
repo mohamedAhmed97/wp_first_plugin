@@ -20,7 +20,6 @@ use Inc;
 use Inc\Active;
 use Inc\Deactive;
 
-
 function active()
 {
     Active::active();
