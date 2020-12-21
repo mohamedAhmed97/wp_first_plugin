@@ -4,16 +4,18 @@ namespace Inc\Pages;
 
 use \Inc\Controller\BaseController;
 use \Inc\API\SettingsApi;
-
+use \Inc\Controller\TemplateController;
 class Admin extends BaseController
 {
     public $settings;
+    public $template;
     public $page = array();
     public $sub_menu = array();
     public function __construct()
     {
         parent::__construct();
         $this->settings = new SettingsApi();
+        $this->template=new TemplateController();
         $this->pages = array(
             [
                 'page_title' => "schools",
@@ -31,9 +33,7 @@ class Admin extends BaseController
                 'menu_title' => "CPT",
                 'capability' => "manage_options",
                 'menu_slug' => "first_plugin_cpt",
-                'callback' => function () {
-                    echo "<h1>CPT</h1>";
-                }
+                'callback' =>  array($this->template, "cptTemplate"),
             ],
             [
                 'parent_slug' => "first_plugin",
@@ -41,9 +41,7 @@ class Admin extends BaseController
                 'menu_title' => "taxonmies",
                 'capability' => "manage_options",
                 'menu_slug' => "first_plugin_tax",
-                'callback' => function () {
-                    echo "<h1>Tax</h1>";
-                }
+                'callback' =>array($this->template, "customTaxonomiesTemplate")
             ],
         );
     }
@@ -59,4 +57,5 @@ class Admin extends BaseController
     {
         require_once $this->plugin_path . "/templates/school.php";
     }
+    
 }
