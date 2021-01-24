@@ -9,7 +9,8 @@ final class Init
     {
         return [
             Pages\Admin::class,
-            Base\SettingLink::class
+            Base\SettingLink::class,
+            Base\ShortCode::class
         ];
     }
 
